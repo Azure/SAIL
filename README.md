@@ -19,7 +19,7 @@ Knowledge around usage of HuggingFace models and the workflow and AUthN aspects 
 
 2. Deploy the AzureML Managed Online Endpoint: Configure the endpoint and deployment settings using YAML files, specifying the model to deploy, environment variables, and instance configurations.​
 
-3. Test the Deployment: Retrieve the endpoint's scoring URI and API keys, then send test requests to ensure the model is serving correctly.​
+3. Test the Deployment: Retrieve the endpoint's scoring URI and API keys, then send test requests to ensure the model is serving correctly.​ Using MS Entra for authentication and authorization is supported as well: https://learn.microsoft.com/en-us/azure/machine-learning/concept-endpoints-online-auth?view=azureml-api-2
 
 4  (Optional) - Autoscale the AML Endpoint: Set up autoscaling rules to dynamically adjust the number of instances based on real-time metrics, ensuring efficient handling of varying loads.​
 
@@ -45,7 +45,7 @@ az ml online-deployment create -f deployment.yml --all-traffic
 az ml online-endpoint show -n <name>
 az ml online-endpoint get-credentials -n <name>
 ```
-7. Test the model using the test_model.py
+7. Test the model using the test_model.py file
 
 ## Contributing
 
