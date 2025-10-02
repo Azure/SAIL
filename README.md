@@ -43,7 +43,7 @@ az ml online-deployment create -f deployment.yml --all-traffic
 az ml online-endpoint show -n <name>
 az ml online-endpoint get-credentials -n <name>
 ```
-7. Test the model using the test_model.py file
+7. Test the model using the `test_model.py` file
 
 ## Contributing
 
