@@ -45,6 +45,17 @@ az ml online-endpoint get-credentials -n <name>
 ```
 5. Test the model using the `test_model.py` file
 
+
+## Acknowledgements
+
+Special thanks to the following individuals for them invaluable contribution to this repo
+
+- Shankar Ramachandran: https://github.com/shankar-r10n
+- Amy Xin: https://github.com/amyxixin
+- Sherif Messiha: https://github.com/shmessiha
+- Theresa Palayoor
+
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
