@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: maplehack2
+build:
+  path: .
+  dockerfile_path: Dockerfile
