@@ -11,40 +11,41 @@ This gives you the ability utilize OOTB Hugging Face models onto Managed Online 
 At the time of writing, an additional context to using this feature is to ensure data and regional residency abilities that could be achieved through the setup here - in case the models of your choice are not yet available in the Azure  region you are governed in.
 3. Model of your choice from HuggingFace. 
 Knowledge around usage of HuggingFace models and the workflow and AUthN aspects are assumed.
-4. (Optional) You can bring in any generic AI models by leveraging the custom Dockerfile and providing a generic score.py file that loads the model in memory and defines inferencing
+4. (Optional) You can also bring in any generic AI models by leveraging the custom Dockerfile and providing a generic score.py file that loads the model in memory and defines inferencing
 
 ## Key Deployment Steps:
 
-1. Create a Custom Environment for vLLM on AzureML: Define a Dockerfile specifying the environment for the model, utilizing vLLM's base container with necessary dependencies.​
+1. Create a Custom Environment on AzureML: Define a Dockerfile specifying the environment for the model, utilizing vLLM's base container with necessary dependencies.​
 
 2. Deploy the AzureML Managed Online Endpoint: Configure the endpoint and deployment settings using YAML files, specifying the model to deploy, environment variables, and instance configurations.​
 
-
 3. Test the Deployment: Retrieve the endpoint's scoring URI and API keys, then send test requests to ensure the model is serving correctly.​
 
-
-4  (Optional) - Autoscale the vLLM Endpoint: Set up autoscaling rules to dynamically adjust the number of instances based on real-time metrics, ensuring efficient handling of varying loads.​
+4  (Optional) - Autoscale the AML Endpoint: Set up autoscaling rules to dynamically adjust the number of instances based on real-time metrics, ensuring efficient handling of varying loads.​
 
 
 ### Essence of the steps via code/CLI commands: 
 
 1. Authentication
+```
 az account set --subscription <subscription ID>
 az configure --defaults workspace=<Azure Machine Learning workspace name> group=<resource group>
-
-2. Build Environment
+```
+3. Build Environment
+```
 az ml environment create -f environment.yml
-
-3. Deploy to Managed Online Endpoint
+```
+4. Deploy to Managed Online Endpoint
+```
 az ml online-endpoint create -f endpoint.yml
 az ml online-deployment create -f deployment.yml --all-traffic
-
-4. Get API endpoint and API keys
+```
+5. Get API endpoint and API keys
+```
 az ml online-endpoint show -n <name>
 az ml online-endpoint get-credentials -n <name>
-
-5. Test the model
-- test_model.py
+```
+7. Test the model using the test_model.py
 
 ## Contributing
 
