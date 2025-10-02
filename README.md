@@ -11,7 +11,7 @@ This gives you the ability utilize OOTB Hugging Face models onto Managed Online 
 At the time of writing, an additional context to using this feature is to ensure data and regional residency abilities that could be achieved through the setup here - in case the models of your choice are not yet available in the Azure  region you are governed in.
 3. Model of your choice from HuggingFace. 
 Knowledge around usage of HuggingFace models and the workflow and AUthN aspects are assumed.
-
+4. (Optional) You can bring in any generic AI models by leveraging the custom Dockerfile and providing a generic score.py file that loads the model in memory and defines inferencing
 
 ## Key Deployment Steps:
 
