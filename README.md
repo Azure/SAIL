@@ -47,7 +47,7 @@ In particular, this pattern gives you the ability to utilize OOTB Hugging Face m
 3. Managed Online Endpoints: A feature in Azure Machine Learning that simplifies deploying machine learning models for real-time inference by handling serving, scaling, securing, and monitoring complexities.​ At the time of writing, an additional context to using this feature is to ensure data and regional residency abilities that could be achieved through the setup here.
 4. Model of your choice from HuggingFace (or any generic AI model). Knowledge around usage of HuggingFace models and the workflow and AUthN aspects are assumed.
 
-## Key Deployment Steps:
+### Key Deployment Steps:
 
 1. Create a Custom Environment on AzureML: Define a Dockerfile specifying the environment for the model, utilizing vLLM's base container with necessary dependencies.​
 
