@@ -25,7 +25,7 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
 
 * As of December 17, 2025, these are the models within AI Foundry that provide guaranteed data in-transit processing within Canada:
   * Standard for Pay-As-You-Go deployments (available through Microsoft Foundry deployed in Canada East region):
-    * gpt-3.5 turbo models (Versions 1106 and 0125)
+    * gpt-3.5 turbo models (Versions 1106, 0125)
     * gpt-4o (Version 1120)
     * text embedding models (ada, 3-large, 3-small)
   * Regional Provisioned (PTU) deployments (available through Microsoft Foundry deployed in Canada East region):
@@ -34,6 +34,7 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
     * gpt-4o (Versions 1120, 0806, 0513 - also available in Canada Central)
     * gpt-4o-mini - also available in Canada Central
 
+* In addition, certain models within Microsoft Foundry can be deployed through managed compute 
 
 
 
