@@ -24,11 +24,11 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
 * Alternatively, global deployment type means that data might be processed for inferencing in any Foundry location in the world. Data zone is not applicable for Canada as only US and Europe regions have [Data Zone support](https://azure.microsoft.com/en-us/blog/announcing-the-availability-of-azure-openai-data-zones-and-latest-updates-from-azure-ai/?msockid=140ffb7f5488655f0412ed745540640a). 
 
 * As of December 17, 2025, these are the models within AI Foundry that provide guaranteed data in-transit processing within Canada:
-  * Standard for Pay-As-You-Go deployments (available through Microsoft Foundry deployed in Canada East region):
+  * Standard for [Pay-As-You-Go deployments](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-openai#standard-deployment-regional-models-by-endpoint) (available through Microsoft Foundry deployed in Canada East region):
     * gpt-3.5 turbo models (Versions 1106, 0125)
     * gpt-4o (Version 1120)
     * text embedding models (ada, 3-large, 3-small)
-  * Regional Provisioned (PTU) deployments (available through Microsoft Foundry deployed in Canada East region):
+  * Regional [Provisioned Throughput Units (PTU)](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=provisioned%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-openai#provisioned-deployment-model-availability) deployments (available through Microsoft Foundry deployed in Canada East region):
     * o3-mini
     * gpt-5
     * gpt-4o (Versions 1120, 0806, 0513 - also available in Canada Central)
