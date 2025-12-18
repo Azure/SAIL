@@ -1,5 +1,25 @@
 ## Objective
 
+This Sovereign AI Landing Zone (SAIL) repository provides a secure foundation for deploying AI models within Canada’s borders on Azure, so organizations can build, scale, and innovate while maintaining the highest standards of privacy and compliance. As the initial focus, we consider soverignity on Azure as satisfying two key requirements:
+
+* Data **at rest** should be stored within Canadian Azure data centres
+* Data **in-transit** should be processed within Canadian Azure data centres
+
+The critical Azure services in supporting the deployment of sovereign AI models in Canada are [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry&preserve-view=true) and [Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2).
+
+We will provide a comprehensive review of deployment approaches and templates for AI models satisfying the two soverignity requirements of data at rest and in-transit staying within Canada borders. Infrastructure as Code is not _yet_ available in this repo but is coming soon!
+
+## Microsoft Foundry AI model deployment options
+
+It is important to consider AI models deployable within Microsoft Foundry from the list of [Directly Sold by Azure](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-direct-others) models which satisfy deployment requirements from a data security and privacy perspective as outlined [here](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/openai/data-privacy?view=foundry&tabs=azure-portal). 
+
+In particular for models from the Directly Sold by Azure list within Microsoft Foundry:
+
+* Data at rest is stored in the Foundry resource in the customer's Azure tenant, within the same geography as the resource. For Canada, the geography is [Canada Central _and_ Canada East](https://learn.microsoft.com/en-us/azure/reliability/regions-list#azure-regions-list-1). Generally prompts and completions for such models are not stored [except as part of specific features](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/openai/data-privacy?view=foundry&tabs=azure-portal#data-storage-for-azure-direct-models-features) such as fine-tuning and Assistant API. Another default-enabled temporary data storage feature is to [defend against abuse](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/openai/data-privacy?view=foundry&tabs=azure-portal#preventing-abuse) where potentially abusive material from prompts and completions may be stored up to 30 days for the sole purpose of Microsoft review. This feature can be disabled by submitting this [form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUOE9MUTFMUlpBNk5IQlZWWkcyUEpWWEhGOCQlQCN0PWcu). 
+
+
+In general, the service deployment region dictates 
+
 The following is guidance to facilitate deployment of generic AI models including large language models (LLMs) on Azure Machine Learning's (AML) Managed Online Endpoints for efficient, scalable, and secure real-time inference.​ Two patterns of deployment types are described: models through vLLM and generic AI models. By leveraging AML's [Managed Online Endpoints](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-online-endpoints?view=azureml-api-2&tabs=cli), the model would be deployed within the AML region and secured through inbound and outbound private connections thus ensuring a secured and sovereign solution.
 
 In particular, this pattern gives you the ability to utilize OOTB Hugging Face models onto Managed Online Endpoints in AML.
