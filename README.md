@@ -28,7 +28,7 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
     * gpt-3.5 turbo models (Versions 1106, 0125)
     * gpt-4o (Version 1120)
     * text embedding models (ada, 3-large, 3-small)
-  * Regional [Provisioned Throughput Units (PTU)](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=provisioned%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-openai#provisioned-deployment-model-availability) deployments (available through Microsoft Foundry deployed in Canada East region):
+  * Regional [Provisioned Throughput Units (PTU) deployments](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=provisioned%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-openai#provisioned-deployment-model-availability) (available through Microsoft Foundry deployed in Canada East region):
     * o3-mini
     * gpt-5
     * gpt-4o (Versions 1120, 0806, 0513 - also available in Canada Central)
