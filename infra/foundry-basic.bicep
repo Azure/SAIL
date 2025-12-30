@@ -55,6 +55,9 @@ resource account 'Microsoft.CognitiveServices/accounts@2025-04-01-preview' = {
 resource aiAccountPrivateEndpoint 'Microsoft.Network/privateEndpoints@2024-05-01' = {
   name: '${aiFoundryName}-private-endpoint'
   location: resourceGroup().location
+  dependsOn: [
+    account
+  ]
   properties: {
     subnet: {
       id: subnetId                  // Deploy in customer subnet
