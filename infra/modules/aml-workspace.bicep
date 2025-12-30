@@ -27,12 +27,6 @@ param keyVaultId string
 @description('Resource ID of the storage account resource for storing experimentation outputs')
 param storageAccountId string
 
-@description('Resource ID of the AI Services resource')
-param aiServicesId string
-
-@description('Resource ID of the AI Services endpoint')
-param aiServicesTarget string
-
 @description('Resource Id of the virtual network to deploy the resource into.')
 param vnetResourceId string
 
@@ -75,23 +69,6 @@ resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2023-10-01' 
     sharedPrivateLinkResources: []
   }
   kind: 'Default'
-
-  resource aiServicesConnection 'connections@2024-01-01-preview' = {
-    name: '${amlWorkspaceName}-connection-AIServices'
-    properties: {
-      category: 'AIServices'
-      target: aiServicesTarget
-      authType: 'ApiKey'
-      isSharedToAll: true
-      credentials: {
-        key: '${listKeys(aiServicesId, '2021-10-01').key1}'
-      }
-      metadata: {
-        ApiType: 'Azure'
-        ResourceId: aiServicesId
-      }
-    }
-  }
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-11-01' = {
