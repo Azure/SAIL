@@ -21,7 +21,7 @@ param vnetName string = 'private-vnet'
 param peSubnetName string = 'pe-subnet'
 
 @description('Name of virtual network resource group')
-param vnetRgName string = 'virtual-network-rg'
+param vnetRgName string
 
 @description('Build resource IDs across RGs')
 var vnetId   = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks', vnetName)
