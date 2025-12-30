@@ -20,6 +20,12 @@ param vnetName string = 'private-vnet'
 @description('Name of the private endpoint subnet')
 param peSubnetName string = 'pe-subnet'
 
+@description('Name of virtual network resource group')
+param vnetRgName string = 'virtual-network-rg'
+
+@description('Build resource IDs across RGs')
+var vnetId   = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks', vnetName)
+var subnetId = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks/subnets', '${vnetName}/${peSubnetName}')
 
 resource account 'Microsoft.CognitiveServices/accounts@2025-04-01-preview' = {
   name: aiFoundryName
@@ -51,7 +57,7 @@ resource aiAccountPrivateEndpoint 'Microsoft.Network/privateEndpoints@2024-05-01
   location: resourceGroup().location
   properties: {
     subnet: {
-      id: subnet.id                    // Deploy in customer hub subnet
+      id: subnetId                  // Deploy in customer subnet
     }
     privateLinkServiceConnections: [
       {
@@ -92,7 +98,7 @@ resource aiServicesLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2
   name: 'aiServices-link'
   properties: {
     virtualNetwork: {
-      id: virtualNetwork.id                        // Link to specified VNet
+      id: vnetId                       // Link to specified VNet
     }
     registrationEnabled: false           // Don't auto-register VNet resources
   }
@@ -104,7 +110,7 @@ resource aiOpenAILink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@202
   name: 'aiServicesOpenAI-link'
   properties: {
     virtualNetwork: {
-      id: virtualNetwork.id                        // Link to specified VNet
+      id: vnetId                       // Link to specified VNet
     }
     registrationEnabled: false           // Don't auto-register VNet resources
   }
@@ -116,7 +122,7 @@ resource cognitiveServicesLink 'Microsoft.Network/privateDnsZones/virtualNetwork
   name: 'aiServicesCognitiveServices-link'
   properties: {
     virtualNetwork: {
-      id: virtualNetwork.id                      // Link to specified VNet
+      id: vnetId                     // Link to specified VNet
     }
     registrationEnabled: false           // Don't auto-register VNet resources
   }
