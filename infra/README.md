@@ -6,6 +6,7 @@ Create new (or use existing) resource group(s)
 
 ```bash
 az group create --name <new-rg-name> --location <your-selected-region>
+az group create --name <new-rg-name-vnet> --location <your-selected-region>
 ```
 Create virtual network and the subnet in an independent resource group:
 
