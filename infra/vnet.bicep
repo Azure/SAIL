@@ -1,3 +1,11 @@
+/*
+  Generic virtual network and subnet
+  
+  Description: 
+  - Virtual network
+  - Subnet
+*/
+
 @description('Name of the virtual network')
 param vnetName string = 'private-vnet'
 
