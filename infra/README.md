@@ -18,5 +18,5 @@ az deployment group create --resource-group <new-rg-name-vnet> --template-file v
 3. Deploy the foundry.bicep infrastructure as code:
 
 ```bash
-az deployment group create --resource-group <new-rg-name> --template-file foundry-basic.bicep
+az deployment group create --resource-group <new-rg-name> --template-file foundry-basic.bicep --parameters vnetRgName="<new-rg-name-vnet>"
 ```
