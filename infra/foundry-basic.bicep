@@ -25,7 +25,7 @@ param vnetRgName string = 'virtual-network-rg'
 
 @description('Build resource IDs across RGs')
 var vnetId   = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks', vnetName)
-var subnetId = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks/subnets', vnetName, peSubnetName')
+var subnetId = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks/subnets', vnetName, peSubnetName)
 
 resource account 'Microsoft.CognitiveServices/accounts@2025-04-01-preview' = {
   name: aiFoundryName
