@@ -4,13 +4,13 @@
 @minLength(2)
 @maxLength(12)
 @description('Name for the AI resource and used to derive name of dependent resources.')
-param amlName string = 'demo'
+param amlName string = 'sail'
 
 @description('Friendly name for your Azure AI resource')
-param amlFriendlyName string = 'Demo AI resource'
+param amlFriendlyName string = 'SAIL Azure ML deployment demo'
 
 @description('Description of your Azure AI resource displayed in AI studio')
-param amlDescription string = 'This is an example AI resource for use in Azure AI Studio.'
+param amlDescription string = 'This is an example SAIL deployment using Azure ML.'
 
 @description('Set of tags to apply to all resources.')
 param tags object = {}
