@@ -6,7 +6,7 @@
   - Creates a gpt-4o model deployment
 */
 @description('That name is the name of our application. It has to be unique. Type a name followed by your resource group name. (<name>-<resourceGroupName>)')
-param aiFoundryName string = 'foundry-canadaeast-sail'
+param aiFoundryName string = 'foundry-canadaeast-sail-2'
 
 @description('Location for all resources.')
 param location string = 'canadaeast'
