@@ -7,7 +7,7 @@ This Sovereign AI Landing Zone (SAIL) repository provides a secure foundation fo
 
 The critical Azure services in supporting the deployment of sovereign AI models in Canada are [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry&preserve-view=true) and [Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2).
 
-We will provide a comprehensive review of deployment approaches and templates for AI models satisfying the two soverignity requirements of data at rest and in-transit staying within Canada borders. Infrastructure as Code and a number of deployment configuration scripts are not _yet_ available in this repo but is coming soon!
+We will provide a comprehensive review of deployment approaches and templates for AI models satisfying the two soverignity requirements of data at rest and in-transit staying within Canada borders. Initial Azure Bicep scripts for deployment of Azure Machine Learning and Microsoft Foundry through Infrastructure as Code (IaC) can be found in the ```infra``` folker. More updates to the IaC scripts and deployment scripts to come!
 
 ## Microsoft Foundry AI model deployment options
 
