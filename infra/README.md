@@ -18,7 +18,8 @@ az deployment group create --resource-group <new-rg-name-vnet> --template-file v
 Deploy the ```aml.bicep``` infrastructure as code:
 
 ```bash
-az deployment group create --resource-group <new-rg-name> --template-file aml.bicep
+az deployment group create --resource-group <new-rg-name> --template-file aml.bicep --parameters vnetName="private-vnet" vnetRgName="<new-rg-name-vnet>" subnetName="pe-subnet"
+
 ```
 
 
