@@ -57,18 +57,6 @@ module containerRegistry 'dependent/containerregistry.bicep' = {
   }
 }
 
-module aiServices 'dependent/aiservices.bicep' = {
-  name: 'ai${name}${uniqueSuffix}-deployment'
-  params: {
-    location: location
-    aiServiceName: 'ai${name}${uniqueSuffix}'
-    aiServicesPleName: 'ple-${name}-${uniqueSuffix}-ais'
-    subnetId: subnetResourceId
-    virtualNetworkId: vnetResourceId
-    tags: tags
-  }
-}
-
 module storage 'dependent/storage.bicep' = {
   name: 'st${name}${uniqueSuffix}-deployment'
   params: {
@@ -83,8 +71,6 @@ module storage 'dependent/storage.bicep' = {
   }
 }
 
-output aiservicesID string = aiServices.outputs.aiServicesId
-output aiservicesTarget string = aiServices.outputs.aiServicesEndpoint
 output storageId string = storage.outputs.storageId
 output keyvaultId string = keyvault.outputs.keyvaultId
 output containerRegistryId string = containerRegistry.outputs.containerRegistryId
