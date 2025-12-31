@@ -37,9 +37,6 @@ resource account 'Microsoft.CognitiveServices/accounts@2025-10-01-preview' = {
   sku: {
     name: 'S0'
   }
-  dependsOn: [
-    foundry::model
-  ]
   properties: {
     // Networking
     publicNetworkAccess: 'Disabled'
@@ -58,6 +55,9 @@ resource account 'Microsoft.CognitiveServices/accounts@2025-10-01-preview' = {
 resource aiAccountPrivateEndpoint 'Microsoft.Network/privateEndpoints@2024-05-01' = {
   name: '${aiFoundryName}-private-endpoint'
   location: resourceGroup().location
+  dependsOn: [
+    account::modelDeployment
+  ]
   properties: {
     subnet: {
       id: subnetId                  // Deploy in customer subnet
