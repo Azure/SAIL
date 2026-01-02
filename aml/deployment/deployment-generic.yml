@@ -9,3 +9,4 @@ environment:
   image: amlacrname.azurecr.io/repo/deploy-env:v1
 instance_type: Standard_DS2_v2
 instance_count: 1
+egress_public_network_access: disabled
