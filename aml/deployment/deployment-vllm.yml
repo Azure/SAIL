@@ -26,6 +26,7 @@ liveness_probe:
   initial_delay: 10
   period: 10
   timeout: 2
+egress_public_network_access: disabled
   success_threshold: 1
   failure_threshold: 30
 readiness_probe:
