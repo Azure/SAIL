@@ -1,0 +1,12 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: green
+endpoint_name: mlops-endpoint-134-alias2
+model: azureml:mlopsmodeltraining:7
+code_configuration:
+  code: scoring
+  scoring_script: score.py
+environment:
+  image: amlacrname.azurecr.io/repo/deploy-env:v1
+instance_type: Standard_DS2_v2
+instance_count: 1
+egress_public_network_access: disabled
