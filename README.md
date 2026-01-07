@@ -44,7 +44,7 @@ In particular, this pattern gives you the ability to utilize OOTB Hugging Face m
 
  ### Pre-requisites : 
 
-1. vLLM: A high-throughput, memory-efficient inference engine designed for LLMs.​ We will be create a custom Dockerized environment for vLLM on AML as a foundational step.
+1. vLLM: A high-throughput, memory-efficient inference engine designed for LLMs.​ We will be creating a custom Dockerized environment for vLLM on AML as a foundational step.
 2. (Optional) You can also bring in any generic AI models by leveraging the custom Dockerfile and providing a generic score.py file that loads the model in memory and defines inferencing.
 3. Managed Online Endpoints: A feature in Azure Machine Learning that simplifies deploying machine learning models for real-time inference by handling serving, scaling, securing, and monitoring complexities.​ At the time of writing, an additional context to using this feature is to ensure data and regional residency abilities that could be achieved through the setup here.
 4. Model of your choice from HuggingFace (or any generic AI model). Knowledge around usage of HuggingFace models and the workflow and AuthN aspects are assumed.
@@ -86,7 +86,7 @@ az ml online-endpoint get-credentials -n <name>
 
 ## Acknowledgements
 
-Special thanks to the following individuals for them invaluable contributions to this repo:
+Special thanks to the following individuals for their invaluable contributions to this repo:
 
 - Shankar Ramachandran: https://github.com/shankar-r10n
 - Amy Xin: https://github.com/amyxixin
