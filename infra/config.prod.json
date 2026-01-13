@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Production configuration file for SAIL infrastructure deployment",
+  
+  "location": "canadaeast",
+  "resourceGroup": "rg-sail-prod",
+  "vnetResourceGroup": "rg-sail-network-prod",
+  
+  "vnetName": "private-vnet",
+  "subnetName": "pe-subnet",
+  
+  "amlName": "sailprod",
+  "amlFriendlyName": "SAIL Azure ML Production",
+  "amlDescription": "Production SAIL deployment using Azure ML.",
+  "prefix": "sailprod",
+  
+  "foundryName": "foundry-canadaeast-sail-prod",
+  "foundryLocation": "canadaeast",
+  "foundryProjectName": "foundry-canadaeast-sail-prod-proj"
+}

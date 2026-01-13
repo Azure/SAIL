@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Configuration file for SAIL infrastructure deployment",
+  
+  "location": "canadaeast",
+  "resourceGroup": "rg-sail-dev",
+  "vnetResourceGroup": "rg-sail-network-dev",
+  
+  "vnetName": "private-vnet",
+  "subnetName": "pe-subnet",
+  
+  "amlName": "sail",
+  "amlFriendlyName": "SAIL Azure ML deployment demo",
+  "amlDescription": "This is an example SAIL deployment using Azure ML.",
+  "prefix": "saildeploy",
+  
+  "foundryName": "foundry-canadaeast-sail-dev",
+  "foundryLocation": "canadaeast",
+  "foundryProjectName": "foundry-canadaeast-sail-dev-proj"
+}
