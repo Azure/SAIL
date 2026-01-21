@@ -153,6 +153,7 @@ function Start-Deployment {
             --parameters amlFriendlyName="$($config.amlFriendlyName)" `
             --parameters amlDescription="$($config.amlDescription)" `
             --parameters prefix=$($config.prefix) `
+            --parameters createPrivateDnsZones=$($config.createPrivateDnsZones) `
             --output none
         
         if ($LASTEXITCODE -eq 0) {
@@ -179,6 +180,7 @@ function Start-Deployment {
             --parameters vnetName=$($config.vnetName) `
             --parameters peSubnetName=$($config.subnetName) `
             --parameters vnetRgName=$($config.vnetResourceGroup) `
+            --parameters createPrivateDnsZones=$($config.createPrivateDnsZones) `
             --output none
         
         if ($LASTEXITCODE -eq 0) {

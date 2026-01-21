@@ -23,6 +23,9 @@ param peSubnetName string = 'pe-subnet'
 @description('Name of virtual network resource group')
 param vnetRgName string
 
+@description('Create private DNS zones for private endpoints. Set to false if DNS zones already exist or are managed centrally.')
+param createPrivateDnsZones bool = true
+
 @description('Build resource IDs across RGs')
 var vnetId   = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks', vnetName)
 var subnetId = resourceId(vnetRgName, 'Microsoft.Network/virtualNetworks/subnets', vnetName, peSubnetName)
@@ -79,23 +82,23 @@ resource aiAccountPrivateEndpoint 'Microsoft.Network/privateEndpoints@2024-05-01
 /* 
   Step 5: Create a private DNS zone for the private endpoint
 */
-resource aiServicesPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource aiServicesPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: 'privatelink.services.ai.azure.com'
   location: 'global'
 }
 
-resource openAiPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource openAiPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: 'privatelink.openai.azure.com'
   location: 'global'
 }
 
-resource cognitiveServicesPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource cognitiveServicesPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: 'privatelink.cognitiveservices.azure.com'
   location: 'global'
 }
 
 // 2) Link AI Services and Azure OpenAI and Cognitive Services DNS Zone to VNet
-resource aiServicesLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
+resource aiServicesLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = if (createPrivateDnsZones) {
   parent: aiServicesPrivateDnsZone
   location: 'global'
   name: 'aiServices-link'
@@ -107,7 +110,7 @@ resource aiServicesLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2
   }
 }
 
-resource aiOpenAILink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
+resource aiOpenAILink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = if (createPrivateDnsZones) {
   parent: openAiPrivateDnsZone
   location: 'global'
   name: 'aiServicesOpenAI-link'
@@ -119,7 +122,7 @@ resource aiOpenAILink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@202
   }
 }
 
-resource cognitiveServicesLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
+resource cognitiveServicesLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = if (createPrivateDnsZones) {
   parent: cognitiveServicesPrivateDnsZone
   location: 'global'
   name: 'aiServicesCognitiveServices-link'
@@ -132,7 +135,7 @@ resource cognitiveServicesLink 'Microsoft.Network/privateDnsZones/virtualNetwork
 }
 
 // 3) DNS Zone Group for AI Services
-resource aiServicesDnsGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2024-05-01' = {
+resource aiServicesDnsGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2024-05-01' = if (createPrivateDnsZones) {
   parent: aiAccountPrivateEndpoint
   name: '${aiFoundryName}-dns-group'
   properties: {

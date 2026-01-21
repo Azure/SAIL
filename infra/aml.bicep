@@ -32,6 +32,9 @@ param location string = resourceGroup().location
 @description('Prefix for all resource names.')
 param prefix string = 'saildeploy'
 
+@description('Create private DNS zones for private endpoints. Set to false if DNS zones already exist or are managed centrally.')
+param createPrivateDnsZones bool = true
+
 // Variables
 var name = toLower('${amlName}')
 
@@ -50,6 +53,7 @@ module aiDependencies 'modules/dependent-resources.bicep' = {
     subnetResourceId: subnetResourceId
     vnetResourceId: vnetResourceId
     prefix: prefix
+    createPrivateDnsZones: createPrivateDnsZones
   }
 }
 
@@ -69,6 +73,7 @@ module amlWorkspace 'modules/aml-workspace.bicep' = {
     //network related
     vnetResourceId: vnetResourceId
     subnetResourceId: subnetResourceId
+    createPrivateDnsZones: createPrivateDnsZones
 
     // dependent resources
     applicationInsightsId: aiDependencies.outputs.applicationInsightsId

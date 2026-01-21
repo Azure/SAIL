@@ -16,5 +16,6 @@
   
   "foundryName": "foundry-canadaeast-sail-prod",
   "foundryLocation": "canadaeast",
-  "foundryProjectName": "foundry-canadaeast-sail-prod-proj"
+  "foundryProjectName": "foundry-canadaeast-sail-prod-proj",
+  "createPrivateDnsZones": false
 }

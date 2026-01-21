@@ -9,12 +9,13 @@
   "vnetName": "private-vnet",
   "subnetName": "pe-subnet",
   
-  "amlName": "sail",
+  "amlName": "sailtest",
   "amlFriendlyName": "SAIL Azure ML deployment demo",
   "amlDescription": "This is an example SAIL deployment using Azure ML.",
-  "prefix": "saildeploy",
+  "prefix": "sailtest2",
   
-  "foundryName": "foundry-canadaeast-sail-dev",
+  "foundryName": "foundry-test-nodns",
   "foundryLocation": "canadaeast",
-  "foundryProjectName": "foundry-canadaeast-sail-dev-proj"
+  "foundryProjectName": "foundry-test-nodns-proj",
+  "createPrivateDnsZones": false
 }

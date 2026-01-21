@@ -33,6 +33,9 @@ param vnetResourceId string
 @description('Subnet Id to deploy into.')
 param subnetResourceId string
 
+@description('Create private DNS zones for private endpoints. Set to false if DNS zones already exist or are managed centrally.')
+param createPrivateDnsZones bool = true
+
 @description('Unique Suffix used for name generation')
 param uniqueSuffix string
 
@@ -92,21 +95,21 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-11-01' = {
 
 }
 
-resource privateLinkApi 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privateLinkApi 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: 'privatelink.api.azureml.ms'
   location: 'global'
   tags: {}
   properties: {}
 }
 
-resource privateLinkNotebooks 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource privateLinkNotebooks 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: 'privatelink.notebooks.azure.net'
   location: 'global'
   tags: {}
   properties: {}
 }
 
-resource vnetLinkApi 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource vnetLinkApi 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (createPrivateDnsZones) {
   parent: privateLinkApi
   name: '${uniqueString(vnetResourceId)}-api'
   location: 'global'
@@ -118,7 +121,7 @@ resource vnetLinkApi 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020
   }
 }
 
-resource vnetLinkNotebooks 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource vnetLinkNotebooks 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (createPrivateDnsZones) {
   parent: privateLinkNotebooks
   name: '${uniqueString(vnetResourceId)}-notebooks'
   location: 'global'
@@ -132,7 +135,7 @@ resource vnetLinkNotebooks 'Microsoft.Network/privateDnsZones/virtualNetworkLink
 
 
 
-resource dnsZoneGroupamlWorkspace 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = {
+resource dnsZoneGroupamlWorkspace 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = if (createPrivateDnsZones) {
   parent: privateEndpoint
   name: 'default'
   properties: {
