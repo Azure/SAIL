@@ -34,6 +34,9 @@ param virtualNetworkId string
 @description('Storage SKU')
 param storageSkuName string = 'Standard_LRS'
 
+@description('Create private DNS zones for private endpoints. Set to false if DNS zones already exist or are managed centrally.')
+param createPrivateDnsZones bool = true
+
 var storageNameCleaned = replace(storageName, '-', '')
 
 var blobPrivateDnsZoneName = 'privatelink.blob.${environment().suffixes.storage}'
@@ -144,12 +147,12 @@ resource storagePrivateEndpointFile 'Microsoft.Network/privateEndpoints@2023-11-
   }
 }
 
-resource blobPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource blobPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: blobPrivateDnsZoneName
   location: 'global'
 }
 
-resource blobPrivateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = {
+resource blobPrivateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = if (createPrivateDnsZones) {
   parent: storagePrivateEndpointBlob
   name: 'blob-PrivateDnsZoneGroup'
   properties:{
@@ -164,7 +167,7 @@ resource blobPrivateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZo
   }
 }
 
-resource blobPrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource blobPrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (createPrivateDnsZones) {
   parent: blobPrivateDnsZone
   name: uniqueString(storage.id)
   location: 'global'
@@ -176,12 +179,12 @@ resource blobPrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNe
   }
 }
 
-resource filePrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource filePrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: filePrivateDnsZoneName
   location: 'global'
 }
 
-resource filePrivateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = {
+resource filePrivateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = if (createPrivateDnsZones) {
   parent: storagePrivateEndpointFile
   name: 'flie-PrivateDnsZoneGroup'
   properties:{
@@ -196,7 +199,7 @@ resource filePrivateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZo
   }
 }
 
-resource filePrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource filePrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (createPrivateDnsZones) {
   parent: filePrivateDnsZone
   name: uniqueString(storage.id)
   location: 'global'

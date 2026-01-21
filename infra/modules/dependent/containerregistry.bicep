@@ -17,6 +17,9 @@ param subnetId string
 @description('Resource ID of the virtual network')
 param virtualNetworkId string
 
+@description('Create private DNS zones for private endpoints. Set to false if DNS zones already exist or are managed centrally.')
+param createPrivateDnsZones bool = true
+
 var containerRegistryNameCleaned = replace(containerRegistryName, '-', '')
 
 var privateDnsZoneName = 'privatelink${environment().suffixes.acrLoginServer}'
@@ -77,12 +80,12 @@ resource containerRegistryPrivateEndpoint 'Microsoft.Network/privateEndpoints@20
   }
 }
 
-resource acrPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource acrPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: privateDnsZoneName
   location: 'global'
 }
 
-resource privateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = {
+resource privateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = if (createPrivateDnsZones) {
   parent: containerRegistryPrivateEndpoint
   name: '${groupName}-PrivateDnsZoneGroup'
   properties:{
@@ -97,7 +100,7 @@ resource privateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGr
   }
 }
 
-resource acrPrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource acrPrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (createPrivateDnsZones) {
   parent: acrPrivateDnsZone
   name: uniqueString(containerRegistry.id)
   location: 'global'
