@@ -16,6 +16,9 @@ param subnetResourceId string
 @description('Resource Id of the virtual network to deploy the resource into.')
 param vnetResourceId string
 
+@description('Create private DNS zones for private endpoints. Set to false if DNS zones already exist or are managed centrally.')
+param createPrivateDnsZones bool = true
+
 // Variables
 var name = toLower('${prefix}')
 
@@ -41,6 +44,7 @@ module keyvault 'dependent/keyvault.bicep' = {
     keyvaultPleName: 'ple-${name}-${uniqueSuffix}-kv'
     subnetId: subnetResourceId
     virtualNetworkId: vnetResourceId
+    createPrivateDnsZones: createPrivateDnsZones
     tags: tags
   }
 }
@@ -53,6 +57,7 @@ module containerRegistry 'dependent/containerregistry.bicep' = {
     containerRegistryPleName: 'ple-${name}-${uniqueSuffix}-cr'
     subnetId: subnetResourceId
     virtualNetworkId: vnetResourceId
+    createPrivateDnsZones: createPrivateDnsZones
     tags: tags
   }
 }
@@ -67,6 +72,7 @@ module storage 'dependent/storage.bicep' = {
     storageSkuName: 'Standard_LRS'
     subnetId: subnetResourceId
     virtualNetworkId: vnetResourceId
+    createPrivateDnsZones: createPrivateDnsZones
     tags: tags
   }
 }

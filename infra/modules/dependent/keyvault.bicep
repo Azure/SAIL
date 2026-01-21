@@ -17,6 +17,9 @@ param subnetId string
 @description('The VNet ID where the Key Vault Private Link is to be created')
 param virtualNetworkId string
 
+@description('Create private DNS zones for private endpoints. Set to false if DNS zones already exist or are managed centrally.')
+param createPrivateDnsZones bool = true
+
 var privateDnsZoneName = 'privatelink${environment().suffixes.keyvaultDns}'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
@@ -66,12 +69,12 @@ resource keyVaultPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-11-01'
   }
 }
 
-resource keyVaultPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+resource keyVaultPrivateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (createPrivateDnsZones) {
   name: privateDnsZoneName
   location: 'global'
 }
 
-resource privateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = {
+resource privateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-11-01' = if (createPrivateDnsZones) {
   parent: keyVaultPrivateEndpoint
   name: 'vault-PrivateDnsZoneGroup'
   properties:{
@@ -86,7 +89,7 @@ resource privateEndpointDns 'Microsoft.Network/privateEndpoints/privateDnsZoneGr
   }
 }
 
-resource keyVaultPrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = {
+resource keyVaultPrivateDnsZoneVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (createPrivateDnsZones) {
   parent: keyVaultPrivateDnsZone
   name: uniqueString(keyVault.id)
   location: 'global'
