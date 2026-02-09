@@ -27,6 +27,11 @@ param ddosProtectionPlanId string = ''
 @description('Create a new DDoS protection plan')
 param createDdosPlan bool = false
 
+// Enforce that when DDoS protection is enabled without creating a new plan,
+// an existing ddosProtectionPlanId must be provided.
+var requireExistingDdosPlanId = enableDdosProtection && !createDdosPlan
+
+assert ddosPlanIdProvided = !requireExistingDdosPlanId || !empty(ddosProtectionPlanId)
 // DDoS Protection Plan (optional - only create if specified)
 resource ddosPlan 'Microsoft.Network/ddosProtectionPlans@2024-05-01' = if (createDdosPlan) {
   name: '${vnetName}-ddos-plan'
