@@ -86,10 +86,10 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-05-01' = {
         addressPrefix
       ]
     }
-    ddosProtectionPlan: enableDdosProtection ? {
-      id: createDdosPlan ? ddosPlan.id : ddosProtectionPlanId
-    } : null
     enableDdosProtection: enableDdosProtection
+    if (enableDdosProtection) ddosProtectionPlan: {
+      id: createDdosPlan ? ddosPlan.id : ddosProtectionPlanId
+    }
     subnets: [
       {
         name: peSubnetName
