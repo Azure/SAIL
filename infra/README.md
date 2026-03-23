@@ -2,6 +2,41 @@
 
 ## What's New
 
+### Azure Policy Governance for AI Resources
+New policy modules to enforce security and compliance for AI resources:
+
+- **`ai-governance.bicep`**: Main deployment file for AI governance policies
+- **`ai-governance.bicepparam`**: Parameters file for customizing policy effects
+- **`modules/ai-policies.bicep`**: Individual policy assignments for resource groups
+- **`modules/ai-policy-initiative.bicep`**: Policy initiative (policy set) definition
+
+**Policies included:**
+| Category | Policies |
+|----------|----------|
+| **Network Security** | Disable public access, require private endpoints, VNet integration |
+| **Authentication** | Disable local auth, require Azure AD/Entra ID |
+| **Data Protection** | Customer-managed key (CMK) encryption |
+| **Model Governance** | Restrict deployments to approved AI models |
+| **Logging** | Enable diagnostic logging for AI services |
+
+**Deployment:**
+```bash
+# Deploy at subscription level
+az deployment sub create \
+  --location canadaeast \
+  --template-file ai-governance.bicep \
+  --parameters ai-governance.bicepparam
+```
+
+**Policy Effects:**
+- `Audit` - Report non-compliant resources (recommended for dev/test)
+- `Deny` - Block non-compliant deployments (recommended for production)
+- `Disabled` - Turn off the policy
+
+See the parameters file for detailed configuration options.
+
+---
+
 ### Automated Deployment Script (PowerShell)
 We've added comprehensive PowerShell-based deployment automation to simplify infrastructure deployment:
 

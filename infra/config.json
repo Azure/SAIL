@@ -14,8 +14,8 @@
   "amlDescription": "This is an example SAIL deployment using Azure ML.",
   "prefix": "sailtest2",
   
-  "foundryName": "foundry-test-nodns",
+  "foundryName": "foundry-sail-lz2-dev",
   "foundryLocation": "canadaeast",
-  "foundryProjectName": "foundry-test-nodns-proj",
+  "foundryProjectName": "foundry-sail-lz2-dev-proj",
   "createPrivateDnsZones": false
 }
