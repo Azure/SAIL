@@ -69,9 +69,6 @@ resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2023-10-01' 
     managedNetwork: {
       isolationMode: 'AllowInternetOutBound'
     }
-
-    // private link settings
-    sharedPrivateLinkResources: []
   }
   kind: amlType
 }

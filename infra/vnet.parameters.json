@@ -7,6 +7,12 @@
     },
     "peSubnetName": {
       "value": "pe-subnet"
+    },
+    "databricksHostSubnetName": {
+      "value": "databricks-host-subnet"
+    },
+    "databricksContainerSubnetName": {
+      "value": "databricks-container-subnet"
     }
   }
 }

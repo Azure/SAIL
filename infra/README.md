@@ -71,3 +71,19 @@ Deploy the ```foundry.bicep``` infrastructure as code:
 ```bash
 az deployment group create --resource-group <new-rg-name> --template-file foundry-basic.bicep --parameters vnetRgName="<new-rg-name-vnet>"
 ```
+
+### Steps for Azure Databricks
+
+Deploy the ```databricks.bicep``` infrastructure as code:
+
+```bash
+az deployment group create --resource-group <new-rg-name> --template-file databricks.bicep --parameters location=canadacentral vnetRgName="<new-rg-name-vnet>"
+```
+
+This deploys an Azure Databricks workspace with:
+- VNet injection (secure cluster connectivity) using `databricks-host-subnet` and `databricks-container-subnet`
+- Public network access disabled and no public IPs on cluster nodes
+- Private endpoint (`databricks_ui_api`) on the `pe-subnet`
+- Private DNS zone `privatelink.azuredatabricks.net` (set `createPrivateDnsZones=false` to skip)
+
+Prerequisite: the VNet must already be deployed (see *Initial set-up* above) — `vnet.bicep` provisions the two delegated Databricks subnets alongside `pe-subnet`.

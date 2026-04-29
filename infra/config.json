@@ -17,5 +17,11 @@
   "foundryName": "foundry-test-nodns",
   "foundryLocation": "canadaeast",
   "foundryProjectName": "foundry-test-nodns-proj",
+
+  "databricksName": "dbw-sail-dev",
+  "databricksSku": "premium",
+  "databricksHostSubnetName": "databricks-host-subnet",
+  "databricksContainerSubnetName": "databricks-container-subnet",
+
   "createPrivateDnsZones": false
 }

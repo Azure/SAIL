@@ -8,6 +8,7 @@
     - Virtual Network (optional, if it doesn't exist)
     - Azure Machine Learning workspace with dependencies
     - Microsoft Foundry (Azure AI Services) with GPT-4o deployment
+    - Azure Databricks workspace with VNet injection and private connectivity
 
 .PARAMETER ConfigFile
     Path to the configuration JSON file. Default: config.json
@@ -16,7 +17,7 @@
     Skip VNet deployment if it already exists
 
 .PARAMETER DeploymentType
-    Type of deployment: 'all', 'vnet', 'aml', 'foundry'
+    Type of deployment: 'all', 'vnet', 'aml', 'foundry', 'databricks'
 
 .PARAMETER SubscriptionId
     Azure subscription ID (optional, will use current subscription if not specified)
@@ -37,7 +38,7 @@ param(
     [switch]$SkipVNetDeployment,
     
     [Parameter(Mandatory=$false)]
-    [ValidateSet('all', 'vnet', 'aml', 'foundry')]
+    [ValidateSet('all', 'vnet', 'aml', 'foundry', 'databricks')]
     [string]$DeploymentType = 'all',
     
     [Parameter(Mandatory=$false)]
@@ -187,6 +188,35 @@ function Start-Deployment {
             Write-Status "Microsoft Foundry deployed successfully" "Success"
         } else {
             Write-Status "Microsoft Foundry deployment failed" "Error"
+            exit 1
+        }
+    }
+    
+    # Deploy Azure Databricks
+    if ($DeploymentType -eq 'all' -or $DeploymentType -eq 'databricks') {
+        Write-Status "Deploying Azure Databricks workspace..." "Info"
+        
+        $databricksDeploymentName = "databricks-deployment-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+        
+        az deployment group create `
+            --name $databricksDeploymentName `
+            --resource-group $config.resourceGroup `
+            --template-file databricks.bicep `
+            --parameters databricksName=$($config.databricksName) `
+            --parameters location=$($config.location) `
+            --parameters pricingTier=$($config.databricksSku) `
+            --parameters vnetName=$($config.vnetName) `
+            --parameters peSubnetName=$($config.subnetName) `
+            --parameters databricksHostSubnetName=$($config.databricksHostSubnetName) `
+            --parameters databricksContainerSubnetName=$($config.databricksContainerSubnetName) `
+            --parameters vnetRgName=$($config.vnetResourceGroup) `
+            --parameters createPrivateDnsZones=$($config.createPrivateDnsZones) `
+            --output none
+        
+        if ($LASTEXITCODE -eq 0) {
+            Write-Status "Azure Databricks workspace deployed successfully" "Success"
+        } else {
+            Write-Status "Azure Databricks deployment failed" "Error"
             exit 1
         }
     }
