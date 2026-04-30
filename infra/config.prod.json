@@ -17,5 +17,11 @@
   "foundryName": "foundry-canadaeast-sail-prod",
   "foundryLocation": "canadaeast",
   "foundryProjectName": "foundry-canadaeast-sail-prod-proj",
+
+  "databricksName": "dbw-sail-prod",
+  "databricksSku": "premium",
+  "databricksHostSubnetName": "databricks-host-subnet",
+  "databricksContainerSubnetName": "databricks-container-subnet",
+
   "createPrivateDnsZones": false
 }
