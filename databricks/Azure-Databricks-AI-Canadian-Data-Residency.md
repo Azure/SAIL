@@ -1,6 +1,3 @@
-
-Deploying Azure Databricks AI for Canadian Data Residency
-
 This document provides deployment guidance, configuration requirements, and a reference implementation for operating the Azure Databricks Data Intelligence Platform within only Canadian Azure regions. It is an Azure Databricks-focused companion to the Azure [Sovereign AI Landing Zone (SAIL)](https://github.com/Azure/SAIL) repository.
 
   
@@ -742,6 +739,3 @@ Contributions are welcome. See the repository README.md for contact and the cont
 # 6. Trademarks
 
 Databricks, Unity Catalog, Delta Lake, MLflow, and Mosaic AI are trademarks of Databricks, Inc. Microsoft, Azure, and Azure Databricks are trademarks of Microsoft Corporation. Third-party marks referenced in this document belong to their respective owners.
-
-  
-**

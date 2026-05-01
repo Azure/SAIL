@@ -5,9 +5,9 @@ This Sovereign AI Landing Zone (SAIL) repository provides a secure foundation fo
 * Data **at rest** should be stored within Canadian Azure data centres
 * Data **in-transit** should be processed within Canadian Azure data centres
 
-The critical Azure services in supporting the deployment of sovereign AI models in Canada are [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry&preserve-view=true) and [Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2).
+The critical Azure services in supporting the deployment of sovereign AI models in Canada are [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry?view=foundry&preserve-view=true), [Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2), and [Azure Databricks](https://learn.microsoft.com/en-us/azure/databricks/).
 
-We will provide a comprehensive review of deployment approaches and templates for AI models satisfying the two soverignity requirements of data at rest and in-transit staying within Canada borders. Initial Azure Bicep scripts for deployment of Azure Machine Learning and Microsoft Foundry through Infrastructure as Code (IaC) can be found in the ```infra``` folder. More updates to the IaC scripts and deployment scripts to come!
+We will provide a comprehensive review of deployment approaches and templates for AI models satisfying the two soverignity requirements of data at rest and in-transit staying within Canada borders. Initial Azure Bicep scripts for deployment of Azure Machine Learning, Microsoft Foundry, and Azure Databricks through Infrastructure as Code (IaC) can be found in the ```infra``` folder. More updates to the IaC scripts and deployment scripts to come!
 
 ## Microsoft Foundry AI model deployment options
 
@@ -23,7 +23,7 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
 
 * Alternatively, global deployment type means that data might be processed for inferencing in any Foundry location in the world. Data zone is not applicable for Canada as only US and Europe regions have [Data Zone support](https://azure.microsoft.com/en-us/blog/announcing-the-availability-of-azure-openai-data-zones-and-latest-updates-from-azure-ai/?msockid=140ffb7f5488655f0412ed745540640a). 
 
-* As of March 20, 2026, these are the models within AI Foundry that provide guaranteed data in-transit processing within Canada:
+* As of May 1, 2026, these are the models within AI Foundry that provide guaranteed data in-transit processing within Canada:
   * Standard for [Pay-As-You-Go deployments](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-openai#standard-deployment-regional-models-by-endpoint) (available through Microsoft Foundry deployed in Canada East region):
     * gpt-4.1-mini
     * gpt-4o (Version 1120)
@@ -32,9 +32,9 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
     * o3-mini
     * gpt-5-mini (though it is currently out of capacity)
     * gpt-5
-    * gpt-5.1
+    * gpt-5.1 (though it is currently out of capacity)
     * gpt-4o (Versions 1120, 0806, 0513 - also available in Canada Central)
-    * gpt-4o-mini - also available in Canada Central
+    * gpt-4o-mini
 
 * There are also many AI models that could be deployed using the Microsoft Foundry (classic) hub-based service using managed compute, such as [certain Cohere models](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-direct-others#cohere-models-sold-directly-by-azure) from the Directly Sold by Azure list. Such models would be deployed on managed GPU VMs to ensure data in-transit and data at rest remains in Canada geography in a Hub-based Foundry resource, which is based on the Azure ML deployment infrastructure as seen below. Just remember to set the Azure ML deployment script as `kind: 'hub'`.
 
@@ -86,6 +86,9 @@ az ml online-endpoint get-credentials -n <name>
 ```
 5. Test the model using the `test_model.py` file
 
+## Azure Databricks AI deployment options
+
+Details on Azure Databricks soverign AI options within Canada regions can be found here: [Deploying Azure Databricks AI for Canadian Data Residency](databricks/Azure-Databricks-AI-Canadian-Data-Residency.md).
 
 ## Acknowledgements
 
