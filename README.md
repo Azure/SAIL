@@ -34,7 +34,7 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
     * gpt-5
     * gpt-5.1 (though it is currently out of capacity)
     * gpt-4o (Versions 1120, 0806, 0513 - also available in Canada Central)
-    * gpt-4o-mini - also available in Canada Central
+    * gpt-4o-mini
 
 * There are also many AI models that could be deployed using the Microsoft Foundry (classic) hub-based service using managed compute, such as [certain Cohere models](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-direct-others#cohere-models-sold-directly-by-azure) from the Directly Sold by Azure list. Such models would be deployed on managed GPU VMs to ensure data in-transit and data at rest remains in Canada geography in a Hub-based Foundry resource, which is based on the Azure ML deployment infrastructure as seen below. Just remember to set the Azure ML deployment script as `kind: 'hub'`.
 
