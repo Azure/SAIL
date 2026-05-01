@@ -1,6 +1,3 @@
-
-Deploying Azure Databricks AI for Canadian Data Residency
-
 This document provides deployment guidance, configuration requirements, and a reference implementation for operating the Azure Databricks Data Intelligence Platform within only Canadian Azure regions. It is an Azure Databricks-focused companion to the Azure [Sovereign AI Landing Zone (SAIL)](https://github.com/Azure/SAIL) repository.
 
   
