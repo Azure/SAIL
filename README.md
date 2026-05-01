@@ -86,6 +86,9 @@ az ml online-endpoint get-credentials -n <name>
 ```
 5. Test the model using the `test_model.py` file
 
+## Azure Databricks AI deployment options
+
+Details on Azure Databricks soverign AI options within Canada regions can be found here: 
 
 ## Acknowledgements
 
