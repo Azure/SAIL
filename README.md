@@ -46,13 +46,13 @@ In particular for models from the Directly Sold by Azure list within Microsoft F
 | GPT-4o | 2024-05-13 | ✅ | ✅ |
 | GPT-4o | 2024-08-06 | ✅ | ❌ |
 | GPT-4o | 2024-11-20 | ✅ | ❌ |
-| GPT-4o-mini | 2024-07-18 | ✅ | ✅ |
+| GPT-4o-mini | 2024-07-18 | ✅ | ❌ |
 | GPT-5 | 2025-08-07 | ✅ | ❌ |
 | GPT-5-mini | 2025-08-07 | ✅ | ❌ |
 | GPT-5.1 | 2025-11-13 | ✅ | ❌ |
-| GPT-5.2 | 2025-12-11 | ✅ | ✅ |
+| GPT-5.2 | 2025-12-11 | ❌ | ✅ |
 | o3-mini | 2025-01-31 | ✅ | ❌ |
-| o4-mini | 2025-04-16 | ✅ | ❌ |
+
 * There are also many AI models that could be deployed using the Microsoft Foundry (classic) hub-based service using managed compute, such as [certain Cohere models](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry&preserve-view=true&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-direct-others#cohere-models-sold-directly-by-azure) from the Directly Sold by Azure list. Such models would be deployed on managed GPU VMs to ensure data in-transit and data at rest remains in Canada geography in a Hub-based Foundry resource, which is based on the Azure ML deployment infrastructure as seen below. Just remember to set the Azure ML deployment script as `kind: 'hub'`.
 
 ## Azure Machine Learning AI model deployment options
